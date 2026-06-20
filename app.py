@@ -1,4 +1,4 @@
-st.title("🏢 Zyro Dynamics HR Help Desk v2")
+
 
 import streamlit as st
 
@@ -10,6 +10,7 @@ def ask_bot(question):
     return {"answer": "test", "sources": []}
 
 st.set_page_config(page_title="Zyro HR Help Desk", page_icon="🤖")
+st.title("🏢 Zyro Dynamics HR Help Desk v2")
 
 st.title("🏢 Zyro Dynamics HR Help Desk (RAG Chatbot)")
 
