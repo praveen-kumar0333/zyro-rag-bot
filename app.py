@@ -102,11 +102,30 @@ llm = ChatGroq(
 # --------------------
 def ask_bot(question):
 
+    refusal_keywords = ["sports", "cricket", "movie", "weather", "capital", "game"]
+
+    if any(word in question.lower() for word in refusal_keywords):
+        return {
+            "answer": "I can only answer HR-related questions from Zyro Dynamics policy documents.",
+            "sources": []
+        }
+
     docs = retriever.invoke(question)
     context = "\n\n".join([d.page_content for d in docs])
 
     response = llm.invoke(
-        f"Answer using only this context:\n\n{context}\n\nQuestion: {question}"
+        f"""
+You are an HR assistant for Zyro Dynamics.
+
+Answer ONLY using the context below.
+If not present, say you don't know.
+
+Context:
+{context}
+
+Question:
+{question}
+"""
     )
 
     return {
